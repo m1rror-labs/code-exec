@@ -25,18 +25,18 @@ func (r *runtime) ExecuteCode(code string) (string, error) {
 
 	now := time.Now()
 	id := uuid.NewString()
-	fullFilename := "./pkg/dependencies/runtimes/rust/src/bin/" + id + ".rs"
+	fullFilename := "./pkg/dependencies/rust/src/bin/" + id + ".rs"
 	err := os.WriteFile(fullFilename, []byte(code), 0644)
 	if err != nil {
 		return "", err
 	}
 	defer os.Remove(fullFilename)
-	defer os.Remove("./pkg/dependencies/runtimes/rust/target/debug/" + id)
-	defer os.Remove("./pkg/dependencies/runtimes/rust/target/debug/" + id + ".d")
+	defer os.Remove("./pkg/dependencies/rust/target/debug/" + id)
+	defer os.Remove("./pkg/dependencies/rust/target/debug/" + id + ".d")
 
 	cmd := exec.Command("cargo", "run", "--locked", "--bin", id)
-	cmd.Dir = "./pkg/dependencies/runtimes/rust"
-	// cmd.Env = append(os.Environ(), "CARGO_TARGET_DIR=./pkg/dependencies/runtimes/rust/target")
+	cmd.Dir = "./pkg/dependencies/rust"
+	// cmd.Env = append(os.Environ(), "CARGO_TARGET_DIR=./pkg/dependencies/rust/target")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Println(err)

@@ -38,7 +38,7 @@ func (r *runtime) ExecuteCode(code string) (string, error) {
 
 	now := time.Now()
 	id := uuid.NewString()
-	fullFilename := "./pkg/dependencies/runtimes/typescript/dist/" + id + ".ts"
+	fullFilename := "./pkg/dependencies/typescript/dist/" + id + ".ts"
 	err := os.WriteFile(fullFilename, []byte(code), 0644)
 	if err != nil {
 		log.Println("Error writing TypeScript file:", err)
@@ -48,7 +48,7 @@ func (r *runtime) ExecuteCode(code string) (string, error) {
 
 	shortMjsFilename := "./dist/" + id + ".ts"
 	cmd := exec.Command("npx", "esrun", shortMjsFilename, "--watch=false")
-	cmd.Dir = "./pkg/dependencies/runtimes/typescript"
+	cmd.Dir = "./pkg/dependencies/typescript"
 	cmd.Env = append(os.Environ(), "NODE_OPTIONS=--no-warnings")
 	output, err := cmd.CombinedOutput()
 	if err != nil {

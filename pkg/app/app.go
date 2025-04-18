@@ -70,7 +70,7 @@ func (a *App) Run() {
 
 	// Server configurations for access across go routines
 	server := &http.Server{
-		Addr:    getPort(),
+		Addr:    getPort(a.env),
 		Handler: a.engine,
 	}
 
@@ -104,10 +104,14 @@ func (a *App) AttachStandardRoutes() {
 	})
 }
 
-func getPort() string {
+func getPort(env string) string {
 	if port := os.Getenv("PORT"); port != "" {
 		log.Printf("Environment variable PORT=\"%s\"", port)
 		return ":" + port
+	}
+	if env == "dev" {
+		log.Println("Running in development mode, Using port :8081")
+		return ":8081"
 	}
 	log.Println("Environment variable PORT is undefined. Using port :8080 by default")
 	return ":8080"
