@@ -1,0 +1,29 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+0933d643-c877-49f3-b192-18e59ef689b4 = "6A9twm4jodr3AyPjGHFVQMX49e1T8YdWtW5rondTBxvW"
+QeGquHxoyX = "DrBnT8mubFGqEW5w5qBnWmxpEMQn3q8K59ep4boDgVqj"
+RuFhSuqjyB = "EX2BjGSdUbWacvgsN4MEuxWj9GMtBigVhJJZ2Z6yNgWs"
+TCgnTcGoEz = "2gRxhKtaFASzFzRtTeKqabesqCXJWZ4mnjX7XyZPH1sS"
+code_exec = "FF1sKxWKMNzq2apPgkL3bUfkfS6nb8AQ9bseifkNXrx5"
+e8c32177-5ee6-425b-95e4-9eab38f55ac3 = "8793JCptC4PtRUBhfdn7PNNoX4odhE8JTcHZKVwjzSuB"
+fwyipqpwjyhgvqmhkrsv = "8GsRDTKxZFFPhGUjNaGQDF8RfZVV4cCTGSW7ZsrCgtrb"
+gbfpoeqtlshaeoaztxrj = "GP5NRHn7dJraZBh7pr596AfnJarKbv7Snmi6KBr7wRo1"
+nuKnDAKbtt = "ABAYXGjV9bynpzGTjvqdhov2qJcQC6BBGzMDXn8fFfVB"
+tfqqzgzkbubfgbxgjqdu = "CpQLhketcAJeAZKzMrFzhnDgmb3qerNjud9JFUM8oURx"
+zVodCEFtOK = "CnA1jcDsbXjuW9v6EM6ELPumBNXscUmuXwHBNPZC7VK3"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

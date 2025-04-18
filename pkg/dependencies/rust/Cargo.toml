@@ -1,0 +1,28 @@
+[workspace]
+members = []
+
+[package]
+name = "rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+solana-client = "2.2.0"
+solana-sdk = "2.2.0"
+solana-account-decoder-client-types = "2.2.0"
+mpl-token-metadata = "5.1.0"
+spl-token-client = "0.14.0"
+spl-token-2022 = "7.0.0"
+spl-token = "7.0.0"
+spl-associated-token-account = "6.0.0"
+tokio = { version = "1.43.0", features = ["full"] }
+anyhow = "1.0.96"
+serde_json = "1.0.139"
+tiny-bip39 = "2.0.0"
+bs58 = "0.5.1"
+reqwest = { version= "0.12.15", features = ["json"] }
+serde = "1.0.219"
+
+[profile.dev]
+debug = 0
+strip = "debuginfo"

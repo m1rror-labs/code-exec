@@ -1,0 +1,43 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.0",
+    "@metaplex-foundation/js": "^0.20.1",
+    "@metaplex-foundation/mpl-token-metadata": "^3.4.0",
+    "@metaplex-foundation/umi": "^1.2.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.2.0",
+    "@solana-developers/helpers": "^2.8.1",
+    "@solana-program/memo": "^0.7.0",
+    "@solana-program/system": "^0.7.0",
+    "@solana-program/token-2022": "^0.4.0",
+    "@solana/kit": "^2.1.0",
+    "@solana/spl-token": "^0.4.13",
+    "@solana/web3.js": "^1.98.0",
+    "bip39": "^3.1.0",
+    "bs58": "^6.0.0",
+    "crypto": "^1.0.1",
+    "esrun": "^3.2.26",
+    "gill": "^0.8.2",
+    "i": "^0.3.7",
+    "micro-ed25519-hdkey": "^0.1.2",
+    "npm": "^11.2.0",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1",
+    "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.13"
+  },
+  "browser": {
+    "crypto": false
+  }
+}
