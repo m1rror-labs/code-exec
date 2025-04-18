@@ -110,5 +110,5 @@ func getPort() string {
 		return ":" + port
 	}
 	log.Println("Environment variable PORT is undefined. Using port :8080 by default")
-	return ":8081"
+	return ":8080"
 }
