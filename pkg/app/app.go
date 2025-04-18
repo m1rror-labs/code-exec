@@ -33,7 +33,6 @@ type App struct {
 
 func NewApp(
 	env string,
-	repo pkg.Repository,
 	rpcEngine pkg.RpcEngine,
 ) *App {
 	engine := gin.New()
@@ -57,7 +56,6 @@ func NewApp(
 		env:    env,
 		engine: engine,
 		deps: pkg.Dependencies{
-			Repo:          repo,
 			RpcEngine:     rpcEngine,
 			TsRuntime:     typescript.NewRuntime(),
 			RustRuntime:   rust.NewRuntime(),

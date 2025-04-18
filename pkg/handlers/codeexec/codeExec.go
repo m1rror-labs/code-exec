@@ -15,13 +15,13 @@ func ExecuteTypescript(c *gin.Context, deps pkg.Dependencies) {
 		return
 	}
 
-	output, logs, err := codeexec.RunCode(c, request.Code, deps.TsRuntime, deps.Repo)
+	output, err := codeexec.RunCode(c, request.Code, deps.TsRuntime)
 	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error(), "output": output, "logs": logs})
+		c.JSON(500, gin.H{"error": err.Error(), "output": output})
 		return
 	}
 
-	c.JSON(200, gin.H{"output": output, "logs": logs})
+	c.JSON(200, gin.H{"output": output})
 }
 
 func ExecuteRust(c *gin.Context, deps pkg.Dependencies) {
@@ -31,14 +31,14 @@ func ExecuteRust(c *gin.Context, deps pkg.Dependencies) {
 		return
 	}
 
-	output, logs, err := codeexec.RunCode(c, request.Code, deps.RustRuntime, deps.Repo)
+	output, err := codeexec.RunCode(c, request.Code, deps.RustRuntime)
 	if err != nil {
 		log.Println(err)
-		c.JSON(500, gin.H{"error": err.Error(), "output": output, "logs": logs})
+		c.JSON(500, gin.H{"error": err.Error(), "output": output})
 		return
 	}
 
-	c.JSON(200, gin.H{"output": output, "logs": logs})
+	c.JSON(200, gin.H{"output": output})
 }
 
 func LoadTest(c *gin.Context, deps pkg.Dependencies) {
