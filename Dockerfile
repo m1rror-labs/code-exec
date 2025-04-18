@@ -38,10 +38,10 @@ COPY . .
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build ./cmd/main.go
 
-WORKDIR /app/pkg/dependencies/runtimes/typescript
+WORKDIR /app/pkg/dependencies/typescript
 RUN npm install
 
-WORKDIR /app/pkg/dependencies/runtimes/rust
+WORKDIR /app/pkg/dependencies/rust
 RUN cargo fetch
 RUN cargo build --bin main
 
