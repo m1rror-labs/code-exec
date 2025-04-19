@@ -1,4 +1,4 @@
-FROM backpackapp/build:v0.30.1
+FROM solanafoundation/anchor:v0.31.0
 
 RUN rustup toolchain uninstall stable && rustup toolchain install stable
 
