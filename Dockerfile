@@ -45,6 +45,9 @@ WORKDIR /app/pkg/dependencies/rust
 RUN cargo fetch
 RUN cargo build --bin main
 
+WORKDIR /app/pkg/dependencies/anchor/code-exec
+RUN anchor build
+
 RUN cargo install sccache
 RUN export RUSTC_WRAPPER=sccache
 
