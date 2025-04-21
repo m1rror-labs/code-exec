@@ -15,6 +15,8 @@ spl-token-client = "0.14.0"
 spl-token-2022 = "7.0.0"
 spl-token = "7.0.0"
 spl-associated-token-account = "6.0.0"
+spl-token-confidential-transfer-proof-extraction = "0.2.1"
+spl-token-confidential-transfer-proof-generation = "0.3.0"
 tokio = { version = "1.43.0", features = ["full"] }
 anyhow = "1.0.96"
 serde_json = "1.0.139"
