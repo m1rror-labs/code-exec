@@ -34,6 +34,16 @@ RUN npm install -g typescript
 WORKDIR /app
 COPY . .
 
+# Copy the Python script into the image
+COPY decode_base58.py /app/decode_base58.py
+
+# Install Python and dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    pip3 install base58
+
+# Run the Python script as part of the build step
+RUN python3 /app/decode_base58.py
+
 # Download all dependencies and build project
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build ./cmd/main.go
@@ -52,6 +62,11 @@ RUN cargo install sccache
 RUN export RUSTC_WRAPPER=sccache
 
 WORKDIR /app
+
+
+
+
+
 
 # Run the application
 CMD ["./main"]
