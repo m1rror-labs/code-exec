@@ -47,7 +47,7 @@ func (r *runtime) ExecuteCode(code string) (string, error) {
 	defer os.Remove(fullFilename)
 
 	shortMjsFilename := "./dist/" + id + ".ts"
-	cmd := exec.Command("npx", "esrun", shortMjsFilename, "--watch=false")
+	cmd := exec.Command("bun", shortMjsFilename)
 	cmd.Dir = "./pkg/dependencies/typescript"
 	cmd.Env = append(os.Environ(), "NODE_OPTIONS=--no-warnings")
 	output, err := cmd.CombinedOutput()
