@@ -31,7 +31,9 @@ RUN apt-get update && apt-get install -y \
 # Install TypeScript globally
 RUN npm install -g typescript
 
-RUN curl -fsSL https://bun.sh/install | bash
+RUN curl -fsSL https://bun.sh/install | bash && \
+    mv /root/.bun/bin/bun /usr/local/bin/bun && \
+    chmod +x /usr/local/bin/bun
 
 # Copy all files into /app folder
 WORKDIR /app
