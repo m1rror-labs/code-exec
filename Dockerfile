@@ -24,7 +24,8 @@ RUN apt-get update && apt-get install -y \
     ghdl \
     openssl \
     clang-15 \
-    mold
+    mold \
+    unzip
 
 
 # Install TypeScript globally
