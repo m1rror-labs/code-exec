@@ -1,115 +1,35 @@
 use anchor_lang::prelude::*;
+use anchor_lang::system_program::{transfer, Transfer};
 
-declare_id!("DuT6R8tQGYa8ACYXyudFJtxDppSALLcmK39b7918jeSC");
+declare_id!("9AvUNHjxscdkiKQ8tUn12QCMXtcnbR9BVGq3ULNzFMRi");
 
 #[program]
-pub mod basic_5 {
+pub mod cpi {
     use super::*;
 
-    pub fn create(ctx: Context<Create>) -> Result<()> {
-        let action_state = &mut ctx.accounts.action_state;
-        // * - means dereferencing
-        action_state.user = *ctx.accounts.user.key;
-        // Lets initialize the state
-        action_state.action = 0;
+    pub fn sol_transfer(ctx: Context<SolTransfer>, amount: u64) -> Result<()> {
+        let from_pubkey = ctx.accounts.sender.to_account_info();
+        let to_pubkey = ctx.accounts.recipient.to_account_info();
+        let program_id = ctx.accounts.system_program.to_account_info();
 
-        Ok(())
-    }
+        let cpi_context = CpiContext::new(
+            program_id,
+            Transfer {
+                from: from_pubkey,
+                to: to_pubkey,
+            },
+        );
 
-    pub fn walk(ctx: Context<Walk>) -> Result<()> {
-        let action_state = &mut ctx.accounts.action_state;
-        // Lets change the robot action state to "walk"
-        action_state.action = 1;
-
-        Ok(())
-    }
-
-    pub fn run(ctx: Context<Run>) -> Result<()> {
-        let action_state = &mut ctx.accounts.action_state;
-        // Lets change the robot action state to "run"
-        action_state.action = 2;
-
-        Ok(())
-    }
-
-    pub fn jump(ctx: Context<Jump>) -> Result<()> {
-        let action_state = &mut ctx.accounts.action_state;
-        // Lets change the robot action state to "jump"
-        action_state.action = 3;
-
-        Ok(())
-    }
-
-    pub fn reset(ctx: Context<Reset>) -> Result<()> {
-        let action_state = &mut ctx.accounts.action_state;
-        // Lets reset the robot action states
-        action_state.action = 0;
-
+        transfer(cpi_context, amount)?;
         Ok(())
     }
 }
 
 #[derive(Accounts)]
-pub struct Create<'info> {
-    // init means to create action_state account
-    // bump to use unique address for action_state account
-    #[account(
-        init,
-        payer = user,
-        space = 8 + ActionState::INIT_SPACE,
-        seeds = [b"action-state", user.key().as_ref()],
-        bump
-    )]
-    pub action_state: Account<'info, ActionState>,
-    // mut makes it changeable (mutable)
+pub struct SolTransfer<'info> {
     #[account(mut)]
-    pub user: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct Walk<'info> {
-    // Only the user on account action_state, should be able to change state
-    #[account(mut, has_one = user)]
-    pub action_state: Account<'info, ActionState>,
-    // mut makes it changeable (mutable)
+    sender: Signer<'info>,
     #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct Run<'info> {
-    // Only the user on account action_state, should be able to change state
-    #[account(mut, has_one = user)]
-    pub action_state: Account<'info, ActionState>,
-    // mut makes it changeable (mutable)
-    #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct Jump<'info> {
-    // Only the user on account action_state, should be able to change state
-    #[account(mut, has_one = user)]
-    pub action_state: Account<'info, ActionState>,
-    // mut makes it changeable (mutable)
-    #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct Reset<'info> {
-    // Only the user on account action_state, should be able to change state
-    #[account(mut, has_one = user)]
-    pub action_state: Account<'info, ActionState>,
-    // mut makes it changeable (mutable)
-    #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct ActionState {
-    pub user: Pubkey,
-    pub action: u8,
+    recipient: SystemAccount<'info>,
+    system_program: Program<'info, System>,
 }

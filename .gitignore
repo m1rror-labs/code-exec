@@ -3,4 +3,6 @@ main
 *.csv
 .vscode
 **/node_modules
-**/target
+**/target/release
+**/target/debug
+**/target/sbpf-solana-solana

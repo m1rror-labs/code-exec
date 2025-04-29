@@ -1,4 +1,4 @@
-FROM backpackapp/build:v0.31.0
+FROM backpackapp/build:v0.31.1
 
 RUN rustup toolchain uninstall stable && rustup toolchain install stable
 
