@@ -1,11 +1,14 @@
 package pkg
 
+import "github.com/google/uuid"
+
 type CodeExecutor interface {
 	ExecuteCode(code string) (string, error)
 }
 
 type ProgramBuilder interface {
-	BuildProgram(code string) ([]byte, error)
+	BuildProgram(code string, deleteArtifacts bool) ([]byte, string, error)
+	TestCode(code string, blockchainID uuid.UUID, codeID string) (string, error)
 }
 
 type Err string

@@ -6,3 +6,4 @@ main
 **/target/release
 **/target/debug
 **/target/sbpf-solana-solana
+**/.anchor
