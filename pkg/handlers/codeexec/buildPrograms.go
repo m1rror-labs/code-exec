@@ -53,5 +53,5 @@ func BuildAndTestAnchor(c *gin.Context, deps pkg.Dependencies) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(200, gin.H{"message": "Program built, loaded, and tested successfully", "result": result})
+	c.JSON(200, gin.H{"message": "Program built, loaded, and tested successfully", "output": result})
 }
